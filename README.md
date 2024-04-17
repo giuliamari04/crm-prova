@@ -170,7 +170,9 @@ php artisan make:model Nome -rcms --requests
 	
 php artisan make:request StoreMomemodelRequest
 
+## Installazione Livewire
 
+php artisan make:livewire Nome_componente
 ```
 ## Auth
 
@@ -200,5 +202,6 @@ Route::middleware(['auth', 'verified'])
 Route::fallback(function() {
     return redirect()->route('admin.dashboard');
 });
+
 
 ```
