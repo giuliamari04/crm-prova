@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
 <section>
     <div class="container-fluid px-4">
         <h1 class="mt-4">  {{ __('Dashboard') }}</h1>

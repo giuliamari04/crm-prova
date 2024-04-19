@@ -170,10 +170,17 @@ php artisan make:model Nome -rcms --requests
 	
 php artisan make:request StoreMomemodelRequest
 
-## Installazione Livewire
 
-php artisan make:livewire Nome_componente
 ```
+## Installazione Livewire
+```bash
+#installazione
+php artisan make:livewire Nome_componente 
+#inserimento componente in pagina blade (2 opzioni)
+@livewire('nomecomponente')
+ <livewire:nomecomponente/>
+```
+
 ## Auth
 
 ```bash
