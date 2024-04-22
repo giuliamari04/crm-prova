@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TableHomeController;
+use App\Http\Controllers\Admin\TableHomeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Livewire\ClientsTable;
 
@@ -24,7 +24,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('home', TableHomeController::class)->name('hometable');
+    Route::get('home', [TableHomeController::class, 'index'])->name('home');
 
 });
 

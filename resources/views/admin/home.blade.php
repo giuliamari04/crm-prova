@@ -1,6 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
     <section class="container">
-        @livewire('ClientsTable')
+        <div class="p-4">
+             @livewire('ClientsTable')
+        </div>
+
     </section>
 @endsection

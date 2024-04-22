@@ -15,7 +15,7 @@
                 </a>
                 <div class="collapse" id="collapsePosts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="admin/home.blade.php">Tabella Clienti</a>
+                        <a class="nav-link" href="{{route('admin.home')}}">Tabella Clienti</a>
                         {{-- <a class="nav-link" href="{{route('admin.posts.create')}}">Aggiungi Cliente</a> --}}
                     </nav>
                 </div>
