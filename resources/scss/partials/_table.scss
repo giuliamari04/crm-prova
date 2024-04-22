@@ -5,3 +5,22 @@
     overflow: hidden;
     padding: 10px;
 }
+
+.bottone-indietro{
+    a{
+         font-size:large;
+         color: inherit;
+         text-decoration: none;
+    }
+}
+
+.show-clients{
+    ul{
+        li{
+            list-style: none;
+            span{
+                font-weight: bold;
+            }
+        }
+    }
+}

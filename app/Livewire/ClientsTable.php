@@ -80,7 +80,30 @@ class ClientsTable extends Component
         $this->render();
     }
 
-    public function redirectToPage(){
-        return redirect()->route('dettaglio-cliente');
+    public function redirectToDetailPage($clientId)
+    {
+        return redirect()->route('admin.client.show', ['id' => $clientId]);
     }
+
+    public function redirectToEditPage($clientId)
+    {
+        return redirect()->route('admin.client.edit', ['id' => $clientId]);
+    }
+
+    public function confirmDelete($clientId)
+    {
+        // Mostra un messaggio di conferma prima di eliminare il cliente
+        if (confirm('Sei sicuro di voler eliminare questo cliente?')) {
+            $this->deleteClient($clientId);
+        }
+    }
+
+    public function deleteClient($clientId)
+    {
+        // Codice per eliminare effettivamente il cliente
+        Client::find($clientId)->delete();
+        $this->refreshClients(); // Aggiorna la tabella dopo l'eliminazione
+    }
+
+
 }

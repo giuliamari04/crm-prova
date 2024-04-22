@@ -24,7 +24,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('home', [TableHomeController::class, 'index'])->name('home');
+    Route::get('/home', [TableHomeController::class, 'index'])->name('home');
+    Route::get('/clients/{id}', [TableHomeController::class, 'show'])->name('client.show');
+    Route::get('/clients/{id}/edit', [TableHomeController::class, 'edit'])->name('client.edit');
 
 });
 
