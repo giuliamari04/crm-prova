@@ -1,6 +1,11 @@
 <!-- resources/views/livewire/table.blade.php -->
 
 <div>
+    <div class="d-flex justify-content-between py-3">
+        <h1>Lista Clienti</h1>
+         <button class="btn btn-success" wire:click="redirectToCratePage()">Crea nuovo cliente</button>
+    </div>
+
     <section class="accordion mb-4 bordo-tabella" id="accordionPanelsStayOpenExample">
         <div class="accordion-item border-0 ">
             <h2 class="accordion-header border-0 ">
@@ -81,6 +86,9 @@
                         </div>
 
                     </div>
+                    <div class="d-flex justify-content-end mx-4 pt-2 w-100">
+                        <button type="reset" class="btn btn-danger" wire:click="resetForm">Svuota campi</button>
+                    </div>
                 </form>
             </div>
 
@@ -100,6 +108,12 @@
                 </tr>
             </thead>
             <tbody>
+                @if($clients->isEmpty())
+                <tr>
+                    <td colspan="7">
+                        <span class="d-flex justify-content-center">Nessun dato presente con queste caratteristiche</span></td>
+                </tr>
+            @else
                 @foreach ($clients as $client)
                     <tr>
                         <td>{{ $client->first_name }}</td>
@@ -123,6 +137,7 @@
                         </td>
                     </tr>
                 @endforeach
+                @endif
             </tbody>
         </table>
     </section>

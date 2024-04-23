@@ -74,12 +74,29 @@ class ClientsTable extends Component
             'companies' => $this->companies,
         ]);
     }
+    public function resetForm(){
+        // Resetta i valori dei filtri nel componente Livewire
+        $this->nameFilter = '';
+        $this->surnameFilter = '';
+        $this->emailFilter = '';
+        $this->phoneFilter = '';
+        $this->cfFilter = '';
+        $this->industryFilter = '';
+        $this->statusFilter = '';
+        $this->companyFilter = '';
 
+        // Aggiorna i risultati della query e la tabella
+        $this->refreshClients();
+    }
     public function refreshClients()
     {
         $this->render();
     }
 
+    public function redirectToCratePage()
+    {
+        return redirect()->route('admin.client.create');
+    }
     public function redirectToDetailPage($clientId)
     {
         return redirect()->route('admin.client.show', ['id' => $clientId]);
