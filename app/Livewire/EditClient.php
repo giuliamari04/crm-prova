@@ -48,7 +48,6 @@ class EditClient extends Component
         // Recupera le aziende associate al cliente
         $this->companies = Company::where('client_id', $id)->get();
         $this->companyName = $this->companies->first()->name;
-        // Recupera le industrie per il dropdown
         $this->industries = Client::pluck('industry')->unique()->filter();
     }
 

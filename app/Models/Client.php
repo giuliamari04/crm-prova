@@ -16,6 +16,7 @@ class Client extends Model
      */
     protected $table = 'clients';
     protected $fillable = [
+        'company_id',
         'first_name',
         'last_name',
         'email',
@@ -32,4 +33,8 @@ class Client extends Model
         'contract_start_date',
         'contract_end_date',
     ];
+    public function company()
+    {
+        return $this->hasMany(Company::class);
+    }
 }

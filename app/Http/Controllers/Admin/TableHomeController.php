@@ -17,26 +17,31 @@ class TableHomeController extends Controller
         return view('admin.home');
     }
 
-    // public function show($id)
-    // {
-    //     // Metodo per visualizzare i dettagli di un cliente
-    //     $client = Client::findOrFail($id);
-    //     $companies = Company::where('client_id', $id)->get();
-    //     return view('admin.client.show', compact('client', 'companies'));
-    // }
+    public function show($id)
+    {
+        // Metodo per visualizzare i dettagli di un cliente
+        $client = Client::findOrFail($id);
+        $companies = Company::where('client_id', $id)->get();
+        return view('admin.client.show', compact('client', 'companies'));
+    }
 
-    // public function edit($id)
-    // {
-    //     // Metodo per visualizzare il formulario di modifica di un cliente
-    //     $client = Client::findOrFail($id);
-    //     return view('admin.client.edit', compact('client'));
-    // }
+    public function edit($id)
+    {
+        // Metodo per visualizzare il formulario di modifica di un cliente
+        $client = Client::findOrFail($id);
+        return view('admin.client.edit', compact('client'));
+    }
 
-    // public function destroy($id)
-    // {
-    //     // Metodo per eliminare un cliente
-    //     $client = Client::findOrFail($id);
-    //     $client->delete();
-    //     return redirect()->route('admin.dashboard')->with('success', 'Cliente eliminato con successo.');
-    // }
+    public function create()
+    {
+        // Metodo per visualizzare il formulario per creare un nuovo cliente
+        return view('admin.client.create');
+    }
+    public function destroy($id)
+    {
+        // Metodo per eliminare un cliente
+        $client = Client::findOrFail($id);
+        $client->delete();
+        return redirect()->route('admin.dashboard')->with('success', 'Cliente eliminato con successo.');
+    }
 }

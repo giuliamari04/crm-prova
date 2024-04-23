@@ -19,7 +19,6 @@ class CompaniesSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             Company::create([
-                'client_id' => $faker->numberBetween(1, 10), // Assuming you have 10 clients in the clients table
                 'name' => $faker->company,
                 'email' => $faker->unique()->safeEmail,
                 'phone_number' => $faker->phoneNumber,

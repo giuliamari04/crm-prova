@@ -27,6 +27,8 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::get('/home', [TableHomeController::class, 'index'])->name('home');
     Route::get('/clients/{id}', [TableHomeController::class, 'show'])->name('client.show');
     Route::get('/clients/{id}/edit', [TableHomeController::class, 'edit'])->name('client.edit');
+    Route::get('/client/create', [TableHomeController::class, 'create'])->name('client.create');
+
 
 });
 

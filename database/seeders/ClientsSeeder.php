@@ -19,6 +19,7 @@ class ClientsSeeder extends Seeder
         // Ciclo per generare dati per ogni cliente
         for ($i = 0; $i < 10; $i++) {
             Client::create([
+                'company_id' => $faker->numberBetween(1, 10),
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
                 'email' => $faker->unique()->safeEmail,

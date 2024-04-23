@@ -62,7 +62,7 @@ class ClientsTable extends Component
         }
 
         if ($this->companyFilter) {
-            $query->where('id', $this->companyFilter);
+            $query->where('company_id', $this->companyFilter);
         }
 
 

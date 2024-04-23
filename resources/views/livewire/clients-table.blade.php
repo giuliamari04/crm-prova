@@ -3,7 +3,7 @@
 <div>
     <div class="d-flex justify-content-between py-3">
         <h1>Lista Clienti</h1>
-         <button class="btn btn-success" wire:click="redirectToCratePage()">Crea nuovo cliente</button>
+        <button class="btn btn-success" wire:click="redirectToCratePage()">Crea nuovo cliente</button>
     </div>
 
     <section class="accordion mb-4 bordo-tabella" id="accordionPanelsStayOpenExample">
@@ -78,7 +78,7 @@
                                     <option value="">Tutti</option>
                                     @if ($companies->isNotEmpty())
                                         @foreach ($companies as $company)
-                                            <option value="{{ $company->client_id }}">{{ $company->name }}</option>
+                                            <option value="{{ $company->id }}">{{ $company->name }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -108,35 +108,46 @@
                 </tr>
             </thead>
             <tbody>
-                @if($clients->isEmpty())
-                <tr>
-                    <td colspan="7">
-                        <span class="d-flex justify-content-center">Nessun dato presente con queste caratteristiche</span></td>
-                </tr>
-            @else
-                @foreach ($clients as $client)
+                @if ($clients->isEmpty())
                     <tr>
-                        <td>{{ $client->first_name }}</td>
-                        <td>{{ $client->last_name }}</td>
-                        <td>{{ $client->email }}</td>
-                        <td>{{ $client->phone }}</td>
-                        <td>{{ $client->status }}</td>
-                        @foreach ($companies as $company)
-                            @if ($client->id === $company->client_id)
-                                <td>{{ $company->name ?? 'N/A' }}</td>
-                            @endif
-                        @endforeach
-                        <td class="d-flex">
-                        <td class="d-flex">
-                            <button class="btn btn-primary mx-1 " wire:click="redirectToDetailPage({{ $client->id }})"><i class="fa-solid fa-circle-info"></i></button>
-                            <button class="btn btn-warning mx-1 " wire:click="redirectToEditPage({{ $client->id }})"><i class="fa-solid fa-user-pen"></i></button>
-                            <button class="btn btn-danger mx-1 " wire:click="confirmDelete({{ $client->id }})"><i class="fa-solid fa-trash-can"></i></button>
-
-                        </td>
-
+                        <td colspan="7">
+                            <span class="d-flex justify-content-center">Nessun dato presente con queste
+                                caratteristiche</span>
                         </td>
                     </tr>
-                @endforeach
+                @else
+                    @foreach ($clients as $client)
+                        <tr>
+                            <td>{{ $client->first_name }}</td>
+                            <td>{{ $client->last_name }}</td>
+                            <td>{{ $client->email }}</td>
+                            <td>{{ $client->phone }}</td>
+                            <td>{{ $client->status }}</td>
+
+
+                            @foreach ($companies as $company)
+                                @if ($client->company_id === $company->id)
+                                    <td>
+                                        {{ $company->name ?? 'N/A' }}</td>
+                                @endif
+                            @endforeach
+
+                            <td class="d-flex">
+
+                                <button class="btn btn-primary mx-1 "
+                                    wire:click="redirectToDetailPage({{ $client->id }})"><i
+                                        class="fa-solid fa-circle-info"></i></button>
+                                <button class="btn btn-warning mx-1 "
+                                    wire:click="redirectToEditPage({{ $client->id }})"><i
+                                        class="fa-solid fa-user-pen"></i></button>
+                                <button class="btn btn-danger mx-1 " wire:click="confirmDelete({{ $client->id }})"><i
+                                        class="fa-solid fa-trash-can"></i></button>
+
+
+
+                            </td>
+                        </tr>
+                    @endforeach
                 @endif
             </tbody>
         </table>
