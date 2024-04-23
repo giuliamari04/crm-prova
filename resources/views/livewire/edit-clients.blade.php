@@ -60,7 +60,7 @@
                     <div class="mx-3 col">
                         <label for="companyName">Azienda:</label> <br>
                         @foreach ($companies as $company )
-                            @if ($company->client_id === $client->id)
+                            @if ($company->id === $client->company_id)
                                 <input type="text" id="companyName" name="comanyName" class=" form-control "
                             placeholder="Inserisci nome azienda" wire:model="companyName" value="{{ old('companyName', $company->name) }}">
                             @endif

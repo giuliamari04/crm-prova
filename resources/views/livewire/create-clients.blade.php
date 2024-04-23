@@ -55,7 +55,7 @@
                                     <option value="">Tutti</option>
                                     @if ($companies->isNotEmpty())
                                         @foreach ($companies as $company)
-                                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                            <option value="{{ $company->name }}">{{ $company->name }}</option>
                                         @endforeach
                                     @endif
                                 </select>

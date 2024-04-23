@@ -10,14 +10,12 @@ class DetailsClient extends Component
 {
     public $client;
     public $industries;
-
     public $companies;
-
 
     public function mount($id)
     {
         $this->client = Client::where('id',$id)->get();
-        $this->companies = Company::where('client_id', $id)->get();
+        $this->companies = Company::all();
         $this->industries = Client::pluck('industry')->unique()->filter();
     }
     public function render()

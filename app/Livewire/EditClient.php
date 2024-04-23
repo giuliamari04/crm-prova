@@ -46,7 +46,7 @@ class EditClient extends Component
 
 
         // Recupera le aziende associate al cliente
-        $this->companies = Company::where('client_id', $id)->get();
+        $this->companies = Company::where('id', $id)->get();
         $this->companyName = $this->companies->first()->name;
         $this->industries = Client::pluck('industry')->unique()->filter();
     }
@@ -75,6 +75,7 @@ class EditClient extends Component
 
         // Aggiorna i dati del cliente con i nuovi valori
         $this->client->update([
+            'company_id'=>$this->companies->id,
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,
             'email'=>$this->email,
@@ -97,6 +98,8 @@ class EditClient extends Component
         session()->flash('message', 'I dati del cliente sono stati aggiornati con successo.');
 
         // Redireziona alla pagina di dettaglio del cliente
-        return redirect()->route('admin.client.show', ['id' => $this->client->id]);
+        return redirect()->route('admin.client.show', [
+            'id' => $this->client->id,
+        ]);
     }
 }

@@ -109,17 +109,17 @@ class ClientsTable extends Component
 
     public function confirmDelete($clientId)
     {
-        // Mostra un messaggio di conferma prima di eliminare il cliente
-        if (confirm('Sei sicuro di voler eliminare questo cliente?')) {
-            $this->deleteClient($clientId);
-        }
+       $this->emit('confirm-delete', $clientId);
     }
 
     public function deleteClient($clientId)
     {
         // Codice per eliminare effettivamente il cliente
-        Client::find($clientId)->delete();
-        $this->refreshClients(); // Aggiorna la tabella dopo l'eliminazione
+    Client::find($clientId)->delete();
+    // Chiudi la modale dopo l'eliminazione
+    $this->emit('close-delete-modal');
+    // Aggiorna la tabella dopo l'eliminazione
+    $this->refreshClients();
     }
 
 

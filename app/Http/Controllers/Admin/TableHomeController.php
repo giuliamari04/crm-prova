@@ -21,7 +21,7 @@ class TableHomeController extends Controller
     {
         // Metodo per visualizzare i dettagli di un cliente
         $client = Client::findOrFail($id);
-        $companies = Company::where('client_id', $id)->get();
+        $companies = Company::where('id', $client->company_id)->get();
         return view('admin.client.show', compact('client', 'companies'));
     }
 
@@ -32,7 +32,7 @@ class TableHomeController extends Controller
         return view('admin.client.edit', compact('client'));
     }
 
-    public function create()
+     public function create()
     {
         // Metodo per visualizzare il formulario per creare un nuovo cliente
         return view('admin.client.create');
@@ -42,6 +42,6 @@ class TableHomeController extends Controller
         // Metodo per eliminare un cliente
         $client = Client::findOrFail($id);
         $client->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'Cliente eliminato con successo.');
+        return redirect()->route('admin.home')->with('success', 'Cliente eliminato con successo.');
     }
 }

@@ -43,7 +43,7 @@
       @endforeach
       <h4>Company info</h4>
       <ul>
-       @foreach($companies as $company)
+        @foreach($companies->where('id', $client->company_id) as $company)
        <li>
            nome: {{$company->name}}
        </li>
