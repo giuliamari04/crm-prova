@@ -5,9 +5,11 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Client;
 use App\Models\Company;
+use Livewire\WithPagination;
 
 class ClientsTable extends Component
 {
+    use WithPagination;
     public $nameFilter = '';
     public $surnameFilter = '';
     public $statusFilter = '';
@@ -22,15 +24,13 @@ class ClientsTable extends Component
     public $industries;
 
     public $companies;
-
-
+    protected $listeners = ['confirmDelete'];
     public function mount()
     {
         $this->companies = Company::all();
         $this->clients = Client::all();
         $this->industries = Client::pluck('industry')->unique()->filter();
     }
-
     public function render()
     {
         $query = Client::query();
@@ -66,8 +66,8 @@ class ClientsTable extends Component
         }
 
 
+        // $this->clients = $query->paginate(4);
         $this->clients = $query->get();
-
         return view('livewire.clients-table', [
             'clients' => $this->clients,
             'industries' => $this->industries,
@@ -108,19 +108,19 @@ class ClientsTable extends Component
     }
 
     public function confirmDelete($clientId)
-    {
-       $this->emit('confirm-delete', $clientId);
-    }
+{
+    // Passa l'ID del cliente alla vista per poterlo utilizzare nel tuo script JavaScript
+    $this->clientId = $clientId;
+    $this->showDeleteModal = true;
+}
 
-    public function deleteClient($clientId)
-    {
-        // Codice per eliminare effettivamente il cliente
-    Client::find($clientId)->delete();
-    // Chiudi la modale dopo l'eliminazione
-    $this->emit('close-delete-modal');
-    // Aggiorna la tabella dopo l'eliminazione
-    $this->refreshClients();
-    }
-
+public function deleteClient()
+{
+    // Metodo per eliminare il cliente
+    $client = Client::findOrFail($this->clientId);
+    $client->delete();
+    // Reindirizza alla home
+    return redirect()->route('admin.home')->with('success', 'Cliente eliminato con successo.');
+}
 
 }

@@ -37,7 +37,7 @@ class TableHomeController extends Controller
         // Metodo per visualizzare il formulario per creare un nuovo cliente
         return view('admin.client.create');
     }
-    public function destroy($id)
+    public function destroy(Client $id)
     {
         // Metodo per eliminare un cliente
         $client = Client::findOrFail($id);

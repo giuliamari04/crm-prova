@@ -59,13 +59,14 @@
                     </div>
                     <div class="mx-3 col">
                         <label for="companyName">Azienda:</label> <br>
-                        @foreach ($companies as $company )
-                            @if ($company->id === $client->company_id)
-                                <input type="text" id="companyName" name="comanyName" class=" form-control "
-                            placeholder="Inserisci nome azienda" wire:model="companyName" value="{{ old('companyName', $company->name) }}">
-                            @endif
-                        @endforeach
-
+                        <select id="company_id" class="form-control" wire:model="company_id">
+                            <option value="">Seleziona un'azienda</option>
+                            @foreach ($companies as $company)
+                                <option value="{{ $company->id }}" {{ $client->company_id == $company->id ? 'selected' : '' }}>
+                                    {{ $company->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="row py-2 mx-2">

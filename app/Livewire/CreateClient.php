@@ -16,7 +16,7 @@ class CreateClient extends Component
     public $pIva;
     public $start;
     public $end;
-    public $companyName;
+    public $company_id;
     public $status;
     public $industry;
 
@@ -25,7 +25,7 @@ class CreateClient extends Component
     public function render()
     {
         $this->companies = Company::all();
-        $this->companyName = $this->companies->first()->id;
+
 
         return view('livewire.create-clients',[
             'companies' => $this->companies,
@@ -37,7 +37,7 @@ class CreateClient extends Component
     {
         // Valida i dati del cliente
         $this->validate([
-            'companyName'=>'required',
+            'company_id'=>'required',
             'firstName' => 'required|min:2|max:50',
             'lastName' => 'required|min:2|max:50',
             'email' => 'required|email',
@@ -47,11 +47,13 @@ class CreateClient extends Component
             'start'=>'nullable',
             'end'=>'nullable',
             'pIva'=>'nullable',
+
         ]);
+        $selectedCompany = Company::where('name', $this->company_id)->first();
 
         // Salva i dati del nuovo cliente nel database
         $client = Client::create([
-            'company_id'=>$this->companyName,
+            'company_id'=>$this->company_id,
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,
             'email' => $this->email,

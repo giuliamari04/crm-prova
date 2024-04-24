@@ -1,8 +1,27 @@
 import "./bootstrap";
+import 'alpinejs';
 import "~resources/scss/app.scss";
 import * as bootstrap from "bootstrap";
 import.meta.glob(["../img/**", "../fonts/**"]);
+// Toggle the side navigation
 
+const sidebarToggle = document.body.querySelector("#sidebarToggle");
+if (sidebarToggle) {
+    // Uncomment Below to persist sidebar toggle between refreshes
+    // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+    //     document.body.classList.toggle('sb-sidenav-toggled');
+    // }
+    sidebarToggle.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        document.body.classList.toggle("sb-sidenav-toggled");
+        localStorage.setItem(
+            "sb|sidebar-toggle",
+            document.body.classList.contains("sb-sidenav-toggled")
+        );
+    });
+}
+//modale
 const deleteSubmitButtons = document.querySelectorAll(".delete-button");
 
 deleteSubmitButtons.forEach((button) => {
@@ -27,15 +46,11 @@ deleteSubmitButtons.forEach((button) => {
     });
 });
 
-const previewImage = document.getElementById("image");
-previewImage.addEventListener("change", (event) => {
-    var oFReader = new FileReader();
-    // var image  =  previewImage.files[0];
-    // console.log(image);
-    oFReader.readAsDataURL(previewImage.files[0]);
-
-    oFReader.onload = function (oFREvent) {
-        //console.log(oFREvent);
-        document.getElementById("uploadPreview").src = oFREvent.target.result;
-    };
+document.addEventListener('livewire:load', function () {
+    Livewire.on('confirm-delete', clientId => {
+        $('#confirmDeleteModal').modal('show');
+    });
+    Livewire.on('clientDeleted', () => {
+        $('#confirmDeleteModal').modal('hide');
+    });
 });

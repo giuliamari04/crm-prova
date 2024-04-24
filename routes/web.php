@@ -30,6 +30,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::get('/client/create', [TableHomeController::class, 'create'])->name('client.create');
 
 
+
 });
 
 

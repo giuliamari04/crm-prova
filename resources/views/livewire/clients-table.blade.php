@@ -1,6 +1,14 @@
 <!-- resources/views/livewire/table.blade.php -->
 
 <div>
+    <div>
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
+
     <div class="d-flex justify-content-between py-3">
         <h1>Lista Clienti</h1>
         <button class="btn btn-success" wire:click="redirectToCratePage()">Crea nuovo cliente</button>
@@ -140,10 +148,9 @@
                                 <button class="btn btn-warning mx-1 "
                                     wire:click="redirectToEditPage({{ $client->id }})"><i
                                         class="fa-solid fa-user-pen"></i></button>
-                                <button class="btn btn-danger mx-1 " wire:click="confirmDelete({{ $client->id }})"><i
+
+                                <button class="btn btn-danger mx-1" wire:click="confirmDelete({{$client->id}})"><i
                                         class="fa-solid fa-trash-can"></i></button>
-
-
 
                             </td>
                         </tr>
@@ -151,6 +158,30 @@
                 @endif
             </tbody>
         </table>
+        {{-- {{ $clients->links() }} --}}
+        <div x-data="{ showDeleteModal: false }">
+            <div x-show="showDeleteModal" class="modal opacity-0 ">
+                <!-- Contenuto della modale -->
+                <div class="modal-content">
+                    <h2>Sei sicuro?</h2>
+                    <p>Il cliente sarà cancellato.</p>
+                    <button wire:click="deleteClient">Conferma</button>
+                    <button wire:click="showDeleteModal = false">Annulla</button>
+                </div>
+            </div>
+        </div>
     </section>
+<div>
 
-</div>
+
+
+
+<!-- JavaScript -->
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        Livewire.on('showDeleteModal', clientId => {
+            // Mostra la modale
+            document.querySelector('.modal').classList.add('opacity-100');
+        });
+    });
+</script>

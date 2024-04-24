@@ -19,8 +19,7 @@ class EditClient extends Component
    public $cf;
    public $industry;
    public $status;
-   public $companyName;
-
+    public $company_id;
    public $pIva;
    public $start;
    public $end;
@@ -35,19 +34,24 @@ class EditClient extends Component
             abort(404, 'Cliente non trovato');
         }
           // Inizializza i campi del form con i valori attuali del cliente
+          $this->company_id = $this->client->company_id;
           $this->firstName = $this->client->first_name;
           $this->lastName = $this->client->last_name;
           $this->email = $this->client->email;
           $this->phone = $this->client->phone;
           $this->cf = $this->client->codice_fiscale;
           $this->pIva = $this->client->p_iva;
+          $this->industry = $this->client->industry;
+          $this->status = $this->client->status;
           $this->start = $this->client->contract_start_date;
           $this->end = $this->client->contract_end_date;
 
 
         // Recupera le aziende associate al cliente
-        $this->companies = Company::where('id', $id)->get();
-        $this->companyName = $this->companies->first()->name;
+        $this->companies = Company::all();
+        $this->company_id = $this->client->company_id;
+        //$this->companyName = $this->companies->first()->name;
+        //dd($this->companies);
         $this->industries = Client::pluck('industry')->unique()->filter();
     }
 
@@ -70,29 +74,24 @@ class EditClient extends Component
             'email' => 'required|min:8|max:50',
             'cf'=>'required|min:10|max:15',
             'phone'=>'required|min:10|max:15',
-            'companyName'=>'required|min:2|max:50',
+            'company_id' => 'required'
         ]);
 
+        $selectedCompany = Company::where('name', $this->company_id)->first();
         // Aggiorna i dati del cliente con i nuovi valori
         $this->client->update([
-            'company_id'=>$this->companies->id,
+            'company_id'=>$this->company_id,
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,
             'email'=>$this->email,
             'codice_fiscale'=>$this->cf,
             'phone'=>$this->phone,
             'p_iva'=>$this->pIva,
+            'status'=>$this->status,
+            'industry'=>$this->industry,
             'contract_start_date'=>$this->start,
             'contract_end_date'=>$this->end,
         ]);
-
-        // Aggiorna i dati dell'azienda con i nuovi valori
-        if ($this->companies->isNotEmpty()) {
-            $company = $this->companies->first();
-            $company->update([
-                'name' => $this->companyName,
-            ]);
-        }
 
         // Mostra un messaggio di successo
         session()->flash('message', 'I dati del cliente sono stati aggiornati con successo.');

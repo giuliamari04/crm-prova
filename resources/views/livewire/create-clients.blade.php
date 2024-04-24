@@ -49,16 +49,15 @@
                         </select>
                     </div>
                     <div class="mx-3 col">
-                        <label for="companyFilter">Azienda:</label> <br>
-                                <select wire:model="companyFilter" id="companyFilter" class=" form-control "
-                                    wire:model="companyName">
-                                    <option value="">Tutti</option>
-                                    @if ($companies->isNotEmpty())
-                                        @foreach ($companies as $company)
-                                            <option value="{{ $company->name }}">{{ $company->name }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
+                        <label for="companyName">Azienda:</label> <br>
+                        <select id="company_id" class="form-control" wire:model="company_id">
+                            <option value="">Seleziona un'azienda</option>
+                            @foreach ($companies as $company)
+                                <option value="{{ $company->id }}">
+                                    {{ $company->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="row py-2 mx-2">

@@ -1,10 +1,19 @@
 <main class="show-clients">
+
+        <div>
+            @if (session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+        </div>
+
     <section class="container py-3">
        <div class="d-flex justify-content-between " >
         @foreach ($clients as $client)
         <div class="d-flex align-content-center align-items-center">
              <button class="btn bottone-indietro"><a href="{{route('admin.home')}}"><i class="fa-solid fa-circle-chevron-left fs-1 "></i></a></button>
-           <h2>{{$client->first_name}}{{$client->last_name}}</h2>
+           <h2>{{$client->first_name}} {{$client->last_name}}</h2>
         </div>
         <div class="mx-4">
             <button class="btn btn-warning mx-1 " wire:click="redirectToEditPage({{ $client->id }})"><i class="fa-solid fa-user-pen"></i></button>

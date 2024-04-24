@@ -5,7 +5,6 @@
         <div class="p-4">
              @livewire('ClientsTable')
         </div>
-
     </section>
 </main>
 
