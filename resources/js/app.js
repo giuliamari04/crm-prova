@@ -54,3 +54,7 @@ document.addEventListener('livewire:load', function () {
         $('#confirmDeleteModal').modal('hide');
     });
 });
+
+window.addEventListener('show-delete-modal',event =>{
+    $('#confirmationModal').modal('show');
+})

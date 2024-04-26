@@ -10,8 +10,8 @@
     </div>
 
     <div class="d-flex justify-content-between py-3">
-        <h1>Lista Clienti</h1>
-        <button class="btn btn-success" wire:click="redirectToCratePage()">Crea nuovo cliente</button>
+        <h1>Lista companyi</h1>
+        <button class="btn btn-success" wire:click="redirectToCratePage()">Crea nuova azienda</button>
     </div>
 
     <section class="accordion mb-4 bordo-tabella" id="accordionPanelsStayOpenExample">
@@ -24,7 +24,7 @@
                 </button>
             </h2>
             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                <form wire:submit.prevent="refreshClients" class="d-flex flex-wrap accordion-body ">
+                <form wire:submit.prevent="refreshCompanies" class="d-flex flex-wrap accordion-body ">
                     <div class="container">
                         {{-- prima riga --}}
                         <div class="row py-2">
@@ -33,11 +33,7 @@
                                 <input type="text" id="name" class=" form-control " placeholder="Inserisci nome"
                                     wire:model.lazy="nameFilter">
                             </div>
-                            <div class="mx-3 col col">
-                                <label for="surname">Cognome</label><br>
-                                <input type="text" id="surname" class=" form-control "
-                                    placeholder="Inserisci cognome" wire:model.lazy="surnameFilter">
-                            </div>
+
                             <div class="mx-3 col">
                                 <label for="email">Email</label><br>
                                 <input type="text" id="email" class=" form-control "
@@ -48,19 +44,50 @@
                                 <input type="text" id="phone" class=" form-control "
                                     placeholder="Inserisci numero di telefono" wire:model.lazy="phoneFilter">
                             </div>
+
+                            <div class="mx-3 col">
+                                <label for="cf">Indirizzo</label><br>
+                                <input type="text" id="addressFilter" class=" form-control "
+                                    placeholder="Inserisci indirizzo" wire:model.lazy="addressFilter">
+                            </div>
+
+
                         </div>
                         {{-- seconda riga --}}
                         <div class="row py-2">
+
+
                             <div class="mx-3 col">
-                                <label for="cf">Codice Fiscale</label><br>
-                                <input type="text" id="cf" class=" form-control "
-                                    placeholder="Inserisci codice fiscale" wire:model.lazy="cfFilter">
+                                <label for="cf">CAP</label><br>
+                                <input type="text" id="postal_code" class=" form-control "
+                                    placeholder="Inserisci CAP" wire:model.lazy="postal_codeFilter">
                             </div>
 
                             <div class="mx-3 col">
+                                <label for="cf">Città</label><br>
+                                <input type="text" id="cityFilter" class=" form-control "
+                                    placeholder="Inserisci città" wire:model.lazy="cityFilter">
+                            </div>
+                            <div class="mx-3 col">
+                                <label for="cf">Provincia</label><br>
+                                <input type="text" id="provinceFilter" class=" form-control "
+                                    placeholder="Inserisci provincia" wire:model.lazy="provinceFilter">
+                            </div>
+
+                            <div class="mx-3 col">
+                                <label for="cf">Paese</label><br>
+                                <input type="text" id="countryFilter" class=" form-control "
+                                    placeholder="Inserisci paese" wire:model.lazy="countryFilter">
+                            </div>
+
+
+
+                        </div>
+                        <div class="row py-2 w-50">
+                            <div class="mx-3 col">
                                 <label for="industryFilter">Settore:</label> <br>
                                 <select wire:model="industryFilter" id="industryFilter" class=" form-control "
-                                    wire:change="refreshClients">
+                                    wire:change="refreshCompanies">
                                     <option value="">Tutti</option>
                                     @if ($industries->isNotEmpty())
                                         @foreach ($industries as $industry)
@@ -72,23 +99,11 @@
                             <div class="mx-3 col">
                                 <label for="statusFilter">Status:</label> <br>
                                 <select wire:model="statusFilter" id="statusFilter" class=" form-control "
-                                    wire:change="refreshClients">
+                                    wire:change="refreshCompanies">
                                     <option value="">Tutti</option>
                                     <option value="potenziale">Potenziale</option>
                                     <option value="attivo">Attivo</option>
                                     <option value="ex">Ex</option>
-                                </select>
-                            </div>
-                            <div class="mx-3 col">
-                                <label for="companyFilter">Azienda:</label> <br>
-                                <select wire:model="companyFilter" id="companyFilter" class=" form-control "
-                                    wire:change="refreshClients">
-                                    <option value="">Tutti</option>
-                                    @if ($companies->isNotEmpty())
-                                        @foreach ($companies as $company)
-                                            <option value="{{ $company->id }}">{{ $company->name }}</option>
-                                        @endforeach
-                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -106,17 +121,17 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Nome</th>
-                    <th>Cognome</th>
                     <th>Email</th>
                     <th>Telefono</th>
+                    <th>Città</th>
                     <th>Stato</th>
-                    <th>Azienda</th>
                     <th>Azioni</th>
                 </tr>
             </thead>
             <tbody>
-                @if ($clients->isEmpty())
+                @if ($companies->isEmpty())
                     <tr>
                         <td colspan="7">
                             <span class="d-flex justify-content-center">Nessun dato presente con queste
@@ -124,35 +139,31 @@
                         </td>
                     </tr>
                 @else
-                    @foreach ($clients as $client)
+                    @foreach ($companies as $company)
                         <tr>
-                            <td>{{ $client->first_name }}</td>
-                            <td>{{ $client->last_name }}</td>
-                            <td>{{ $client->email }}</td>
-                            <td>{{ $client->phone }}</td>
-                            <td>{{ $client->status }}</td>
+                            <td>{{$company->id}}</td>
+                            <td>{{ $company->name }}</td>
+                            <td>{{ $company->email }}</td>
+                            <td>{{ $company->phone_number }}</td>
+                            <td>{{$company->city}}</td>
+                            <td>{{ $company->status }}</td>
 
 
-                            @foreach ($companies as $company)
-                                @if ($client->company_id === $company->id)
-                                    <td>
-                                        {{ $company->name ?? 'N/A' }}</td>
-                                @endif
-                            @endforeach
+
 
                             <td class="d-flex">
 
                                 <button class="btn btn-primary mx-1 "
-                                    wire:click="redirectToDetailPage({{ $client->id }})"><i
+                                    wire:click="redirectToDetailPage({{ $company->id }})"><i
                                         class="fa-solid fa-circle-info"></i></button>
                                 <button class="btn btn-warning mx-1 "
-                                    wire:click="redirectToEditPage({{ $client->id }})"><i
+                                    wire:click="redirectToEditPage({{ $company->id }})"><i
                                         class="fa-solid fa-user-pen"></i></button>
 
 
                                 <button class="btn btn-danger mx-1"
-                                    wire:click="deleteClient({{ $client->id }})"
-                                    wire:confirm="Conferma Eliminazione Cliente \n \n Sei sicuro che vuoi cancellare il cliente {{$client->first_name}} {{$client->last_name}} dalla lista? \n \n Se sei sicuro clicca su ---> ok \n Oppure per tornare alla lista clienti clicca su ---> Annulla"
+                                    wire:click="deletecompany({{ $company->id }})"
+                                    wire:confirm="Conferma Eliminazione Azienda \n \n Sei sicuro che vuoi cancellare l'azienda {{$company->name}} dalla lista? \n \n Se sei sicuro clicca su ---> ok \n Oppure per tornare alla lista companyi clicca su ---> Annulla"
                                     >
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
@@ -163,7 +174,7 @@
             </tbody>
         </table>
         <div>
-            {{ $clients->links() }}
+            {{ $companies->links() }}
         </div>
 
 

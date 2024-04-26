@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\TableHomeController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Livewire\ClientsTable;
 
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,11 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::get('/clients/{id}', [TableHomeController::class, 'show'])->name('client.show');
     Route::get('/clients/{id}/edit', [TableHomeController::class, 'edit'])->name('client.edit');
     Route::get('/client/create', [TableHomeController::class, 'create'])->name('client.create');
+
+    Route::get('/company', [CompanyController::class, 'index'])->name('company');
+    Route::get('/company/{id}', [CompanyController::class, 'show'])->name('company.show');
+    Route::get('/company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+    Route::get('/company/create', [CompanyController::class, 'create'])->name('company.create');
 
 
 

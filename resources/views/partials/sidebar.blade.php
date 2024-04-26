@@ -8,6 +8,7 @@
                     Dashboard
                 </a>
                 <div class="sb-sidenav-menu-heading">Resources</div>
+                {{-- clienti --}}
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePosts" aria-expanded="false" aria-controls="collapsePosts">
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Clienti
@@ -19,7 +20,19 @@
                         {{-- <a class="nav-link" href="{{route('admin.posts.create')}}">Aggiungi Cliente</a> --}}
                     </nav>
                 </div>
-
+                {{-- companies --}}
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePosts" aria-expanded="false" aria-controls="collapsePosts">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Companies
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapsePosts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{route('admin.company')}}">Tabella Aziende</a>
+                        {{-- <a class="nav-link" href="{{route('admin.posts.create')}}">Aggiungi Cliente</a> --}}
+                    </nav>
+                </div>
+                {{-- pages --}}
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Pages

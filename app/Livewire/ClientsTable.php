@@ -10,6 +10,7 @@ use Livewire\WithPagination;
 class ClientsTable extends Component
 {
     use WithPagination;
+    protected $paginationTheme='bootstrap';
     public $nameFilter = '';
     public $surnameFilter = '';
     public $statusFilter = '';
@@ -20,15 +21,15 @@ class ClientsTable extends Component
 
     public $industryFilter='';
     public $companyFilter='';
-    public $clients;
+   // public $clients;
     public $industries;
 
     public $companies;
-    protected $listeners = ['confirmDelete'];
+    public $clientDeleteId = null;
     public function mount()
     {
         $this->companies = Company::all();
-        $this->clients = Client::all();
+        // $clients = Client::paginate(4);
         $this->industries = Client::pluck('industry')->unique()->filter();
     }
     public function render()
@@ -65,11 +66,10 @@ class ClientsTable extends Component
             $query->where('company_id', $this->companyFilter);
         }
 
-
-        // $this->clients = $query->paginate(4);
-        $this->clients = $query->get();
+        $this->clients = $query;
+        $clients = $this->clients->paginate(4);
         return view('livewire.clients-table', [
-            'clients' => $this->clients,
+            'clients' => $clients,
             'industries' => $this->industries,
             'companies' => $this->companies,
         ]);
@@ -107,20 +107,13 @@ class ClientsTable extends Component
         return redirect()->route('admin.client.edit', ['id' => $clientId]);
     }
 
-    public function confirmDelete($clientId)
-{
-    // Passa l'ID del cliente alla vista per poterlo utilizzare nel tuo script JavaScript
-    $this->clientId = $clientId;
-    $this->showDeleteModal = true;
-}
-
-public function deleteClient()
+public function deleteClient($id)
 {
     // Metodo per eliminare il cliente
-    $client = Client::findOrFail($this->clientId);
-    $client->delete();
-    // Reindirizza alla home
-    return redirect()->route('admin.home')->with('success', 'Cliente eliminato con successo.');
+    Client::find($id)->delete();
+    session()->flash('message', 'Cliente eliminato con successo.');
+    return redirect()->route('admin.home');
+
 }
 
 }
