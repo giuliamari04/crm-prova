@@ -8,7 +8,7 @@ use App\Models\Company;
 
 class DetailsCompany extends Component
 {
-    public $client;
+    public $clients;
     public $industries;
     public $companies;
 
@@ -22,7 +22,7 @@ class DetailsCompany extends Component
     {
 
         return view('livewire.details-companies', [
-            'clients' => $this->client,
+            'clients' => $this->clients,
             'industries' => $this->industries,
             'companies' => $this->companies,
         ]);
@@ -31,7 +31,7 @@ class DetailsCompany extends Component
 
     public function redirectToDetailPage($companyId)
     {
-        return redirect()->route('admin.client.show', ['id' => $companyId]);
+        return redirect()->route('admin.company.show', ['id' => $companyId]);
     }
 
     public function redirectToEditPage($clientId)

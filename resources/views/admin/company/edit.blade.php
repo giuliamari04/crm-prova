@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-@livewire('EditClient', ['id'=>$client->id])
+@livewire('EditCompany', ['id'=>$company->id])
 @endsection
 

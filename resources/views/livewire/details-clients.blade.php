@@ -50,6 +50,8 @@
       @endif
       </ul>
       @endforeach
+
+      {{-- info azienda --}}
       <h4>Company info</h4>
       <ul>
         @foreach($companies->where('id', $client->company_id) as $company)
@@ -78,6 +80,85 @@
        </li>
        @endforeach
    </ul>
+
+    {{-- info attività --}}
+    @foreach ($activities as $activity)
+    @if (!empty($activities))
+    <h4>Attività cliente</h4>
+    <ul>
+            <li>
+                data attività: {{$activity->activity_date}}
+            </li>
+            <li>
+                soggetto: {{$activity->subject}}
+            </li>
+            <li>
+                stato: {{$activity->status}}
+            </li>
+
+    </ul>
+    @else
+    <h4>Attività cliente</h4>
+    <p>Non ci sono attività registrate per questo cliente</p>
+    @endif
+    @endforeach
+
+     {{-- info interazioni --}}
+     @foreach ($interactions as $interaction)
+     @if (!empty($interactions))
+     <h4>Interazione cliente</h4>
+     <ul>
+             <li>
+                 tipo di interazione: {{$interaction->type}}
+             </li>
+             <li>
+                @if ($interaction->description !==null)
+                descrizione: {{$interaction->description}}
+                @else
+                descrizione : (non disponibile)
+                @endif
+
+             </li>
+             <li>
+                 data interazione: {{$interaction->date_time}}
+             </li>
+
+     </ul>
+     @else
+     <h4>Interazione cliente</h4>
+     <p>Non ci sono interazioni registrate per questo cliente</p>
+     @endif
+     @endforeach
+
+      {{-- info financials --}}
+      @foreach ($financials as $financial)
+      @if (!empty($financials))
+      <h4>Attività finanziarie cliente</h4>
+      <ul>
+              <li>
+                  numero fatttura: {{$financial->invoice_number}}
+              </li>
+              <li>
+                 ammonto: {{$financial->amount}}
+              </li>
+              <li>
+                  data fattura: {{$financial->due_date}}
+              </li>
+              <li>
+                pagamento:
+                @if ($financial->paid === 1)
+                    completato
+                @else
+                    non completato
+                @endif
+              </li>
+
+      </ul>
+      @else
+      <h4>Interazione cliente</h4>
+      <p>Non ci sono interazioni registrate per questo cliente</p>
+      @endif
+      @endforeach
    </div>
    </section>
 </main>

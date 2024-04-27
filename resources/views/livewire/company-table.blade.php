@@ -10,8 +10,8 @@
     </div>
 
     <div class="d-flex justify-content-between py-3">
-        <h1>Lista companyi</h1>
-        <button class="btn btn-success" wire:click="redirectToCratePage()">Crea nuova azienda</button>
+        <h1>Lista Aziende</h1>
+        <button class="btn btn-success" wire:click="redirectToCreatePage()">Crea nuova azienda</button>
     </div>
 
     <section class="accordion mb-4 bordo-tabella" id="accordionPanelsStayOpenExample">

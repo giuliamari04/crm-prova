@@ -106,18 +106,18 @@ class CompanyTable extends Component
         $this->render();
     }
 
-    public function redirectToCratePage()
+    public function redirectToCreatePage()
     {
-        return redirect()->route('admin.client.create');
+        return redirect()->route('admin.company.create');
     }
     public function redirectToDetailPage($companyId)
     {
         return redirect()->route('admin.company.show', ['id' => $companyId]);
     }
 
-    public function redirectToEditPage($clientId)
+    public function redirectToEditPage($companyId)
     {
-        return redirect()->route('admin.client.edit', ['id' => $clientId]);
+        return redirect()->route('admin.company.edit', ['id' => $companyId]);
     }
 
 public function deleteClient($id)
