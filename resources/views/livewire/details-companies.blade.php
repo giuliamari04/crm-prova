@@ -17,7 +17,12 @@
         </div>
         <div class="mx-4">
             <button class="btn btn-warning mx-1 " wire:click="redirectToEditPage({{ $company->id }})"><i class="fa-solid fa-user-pen"></i></button>
-            <button class="btn btn-danger mx-1 " wire:click="confirmDelete({{ $company->id }})"><i class="fa-solid fa-trash-can"></i></button>
+            <button class="btn btn-danger mx-1"
+                                    wire:click="deleteCompany({{ $company->id }})"
+                                    wire:confirm="Conferma Eliminazione Azienda \n \n Sei sicuro che vuoi cancellare l'azienda {{$company->name}} dalla lista? \n \n Se sei sicuro clicca su ---> ok \n Oppure per tornare alla lista companyi clicca su ---> Annulla"
+                                    >
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
         </div>
        </div>
 

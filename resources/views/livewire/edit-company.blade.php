@@ -13,7 +13,7 @@
                     </div>
                     <div class="mx-3 col">
                         <label for="email">Email</label><br>
-                        <input type="text" id="email" class=" form-control " placeholder="Inserisci email" wire:model="email"
+                        <input type="email" id="email" class=" form-control " placeholder="Inserisci email" wire:model="email"
                             value="{{ old('email', $company->email) }}">
                     </div>
                     <div class="mx-3 col">

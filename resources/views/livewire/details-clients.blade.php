@@ -17,12 +17,37 @@
         </div>
         <div class="mx-4">
             <button class="btn btn-warning mx-1 " wire:click="redirectToEditPage({{ $client->id }})"><i class="fa-solid fa-user-pen"></i></button>
-            <button class="btn btn-danger mx-1 " wire:click="confirmDelete({{ $client->id }})"><i class="fa-solid fa-trash-can"></i></button>
+            <button class="btn btn-danger mx-1"
+                                    wire:click="deleteClient({{ $client->id }})"
+                                    wire:confirm="Conferma Eliminazione Cliente \n \n Sei sicuro che vuoi cancellare il cliente {{$client->first_name}} {{$client->last_name}} dalla lista? \n \n Se sei sicuro clicca su ---> ok \n Oppure per tornare alla lista clienti clicca su ---> Annulla"
+                                    >
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+            {{-- <button class="btn btn-primary " wire:click="sendMail({{$client->id}})">Manda una e-mail</button> --}}
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" wire:click="sendMail({{ $client->id }}) aria-controls="offcanvasRight">Manda una Mail</button>
+
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Anteprima email</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="border border-1 border-black p-3 ">
+                        <h5>Ciao {{$client->first_name}}  {{$client->last_name}}</h5>
+                    <p>Ti sto per mandare una mail! <br>
+                       Saluti Admin
+                    </p>
+                    </div>
+                    <button class="btn btn-primary my-3 " wire:click="sendMail({{$client->id}})">Invia </button>
+                </div>
+                </div>
         </div>
        </div>
 
        <div class="mx-5">
            {{-- dettagli generali sul cliente --}}
+            {{-- <button class="btn btn-secondary ">Anteprima e-mail</button> --}}
+
       <h4>General Info</h4>
       <ul>
        <li>
@@ -159,6 +184,9 @@
       <p>Non ci sono interazioni registrate per questo cliente</p>
       @endif
       @endforeach
+   </div>
+   <div>
+
    </div>
    </section>
 </main>

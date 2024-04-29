@@ -28,7 +28,10 @@ class DetailsCompany extends Component
         ]);
     }
 
-
+    public function refreshCompanies()
+    {
+        $this->render();
+    }
     public function redirectToDetailPage($companyId)
     {
         return redirect()->route('admin.company.show', ['id' => $companyId]);
@@ -36,7 +39,7 @@ class DetailsCompany extends Component
 
     public function redirectToEditPage($clientId)
     {
-        return redirect()->route('admin.client.edit', ['id' => $clientId]);
+        return redirect()->route('admin.company.edit', ['id' => $clientId]);
     }
 
     public function confirmDelete($clientId)
@@ -47,11 +50,13 @@ class DetailsCompany extends Component
         }
     }
 
-    public function deleteClient($clientId)
+    public function deleteCompany($id)
     {
-        // Codice per eliminare effettivamente il cliente
-        Client::find($clientId)->delete();
-        $this->refreshClients(); // Aggiorna la tabella dopo l'eliminazione
+        // Metodo per eliminare il cliente
+        Company::find($id)->delete();
+        session()->flash('message', 'Azienda eliminata con successo.');
+        return redirect()->route('admin.company');
+
     }
 
 }

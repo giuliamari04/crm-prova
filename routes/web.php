@@ -34,7 +34,8 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::get('/company', [CompanyController::class, 'index'])->name('company');
     Route::get('/company/{id}', [CompanyController::class, 'show'])->name('company.show');
     Route::get('/company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit');
-    Route::get('/company/create', [CompanyController::class, 'create'])->name('company.create');
+    Route::resource('companies', CompanyController::class);
+    // Route::get('/company/create', [CompanyController::class, 'create'])->name('company.create');
 
 
 

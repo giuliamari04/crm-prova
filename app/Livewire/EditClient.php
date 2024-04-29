@@ -23,6 +23,43 @@ class EditClient extends Component
    public $pIva;
    public $start;
    public $end;
+
+   protected $rules = [
+    'company_id'=>'required',
+        'firstName' => 'required|min:2|max:50',
+        'lastName' => 'required|min:2|max:50',
+        //'email' => 'required|email',
+        'email' => 'required|email|unique:clients,email',
+        'cf' => 'required|min:10|max:15',
+        'phone' => 'required|min:10|max:15',
+        'start'=>'nullable',
+        'industry'=>'required|min:2|max:50',
+        'end'=>'nullable',
+        'pIva'=>'nullable|min:7|max:12',
+
+];
+
+protected $messages = [
+    'firstName.required' => 'Il nome è obbligatorio.',
+    'firstName.min' => 'Il nome deve essere lungo almeno :min caratteri.',
+    'firstName.max' => 'Il nome non può superare :max caratteri.',
+    'lastName.required' => 'Il cognome è obbligatorio.',
+    'lastName.min' => 'Il cognome deve essere lungo almeno :min caratteri.',
+    'lastName.max' => 'Il cognome non può superare :max caratteri.',
+    'email.required' => 'L\'indirizzo email è obbligatorio.',
+    'email.email' => 'L\'indirizzo email non è valido.',
+    'email.min' => 'L\'indirizzo email deve essere lungo almeno :min caratteri.',
+    'email.max' => 'L\'indirizzo email non può superare :max caratteri.',
+    'email.unique' => 'L\'indirizzo email è già in uso.',
+    'cf.required' => 'Il codice fiscale è obbligatorio.',
+    'cf.min' => 'Il codice fiscale deve essere lungo almeno :min caratteri.',
+    'cf.max' => 'Il codice fiscale non può superare :max caratteri.',
+    'phone.required' => 'Il numero di telefono è obbligatorio.',
+    'phone.min' => 'Il numero di telefono deve essere lungo almeno :min caratteri.',
+    'phone.max' => 'Il numero di telefono non può superare :max caratteri.',
+    'company_id.required' => 'Seleziona un\'azienda.',
+
+];
     public function mount($id)
     {
         // Recupera il singolo cliente utilizzando l'ID

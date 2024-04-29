@@ -11,7 +11,7 @@
 
     <div class="d-flex justify-content-between py-3">
         <h1>Lista Aziende</h1>
-        <button class="btn btn-success" wire:click="redirectToCreatePage()">Crea nuova azienda</button>
+        {{-- <button class="btn btn-success" wire:click="redirectToCreatePage()">Crea nuova azienda</button> --}}
     </div>
 
     <section class="accordion mb-4 bordo-tabella" id="accordionPanelsStayOpenExample">
@@ -162,7 +162,7 @@
 
 
                                 <button class="btn btn-danger mx-1"
-                                    wire:click="deletecompany({{ $company->id }})"
+                                    wire:click="deleteCompany({{ $company->id }})"
                                     wire:confirm="Conferma Eliminazione Azienda \n \n Sei sicuro che vuoi cancellare l'azienda {{$company->name}} dalla lista? \n \n Se sei sicuro clicca su ---> ok \n Oppure per tornare alla lista companyi clicca su ---> Annulla"
                                     >
                                     <i class="fa-solid fa-trash-can"></i>

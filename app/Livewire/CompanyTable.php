@@ -120,12 +120,16 @@ class CompanyTable extends Component
         return redirect()->route('admin.company.edit', ['id' => $companyId]);
     }
 
-public function deleteClient($id)
+    public function sendMail($clients)
+    {
+        return redirect()->route('mails.new-contact-mail', ['clients' => $clients]);
+    }
+public function deleteCompany($id)
 {
     // Metodo per eliminare il cliente
-    Client::find($id)->delete();
-    session()->flash('message', 'Cliente eliminato con successo.');
-    return redirect()->route('admin.home');
+    Company::find($id)->delete();
+    session()->flash('message', 'Azienda eliminata con successo.');
+    return redirect()->route('admin.company');
 
 }
 

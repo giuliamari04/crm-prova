@@ -7,9 +7,6 @@ use App\Models\Company;
 
 class CreateCompany extends Component
 {
-    public $clients;
-    public $industries;
-    public $company;
     public $name;
    public $email;
    public $phone;
@@ -22,10 +19,9 @@ class CreateCompany extends Component
    public $country;
    public $website;
 
-
     public function render()
     {
-        return view('livewire.create-company');
+        return view('livewire.create-companies');
 
     }
 
@@ -45,6 +41,8 @@ class CreateCompany extends Component
             'website'=>'nullable',
             'status'=>'required',
         ]);
+
+
 
         // Salva i dati del nuovo cliente nel database
         $company = Company::create([

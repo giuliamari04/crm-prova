@@ -1,8 +1,10 @@
 import "./bootstrap";
-import 'alpinejs';
 import "~resources/scss/app.scss";
+import "alpinejs";
 import * as bootstrap from "bootstrap";
+
 import.meta.glob(["../img/**", "../fonts/**"]);
+
 // Toggle the side navigation
 
 const sidebarToggle = document.body.querySelector("#sidebarToggle");
@@ -21,6 +23,8 @@ if (sidebarToggle) {
         );
     });
 }
+
+
 //modale
 const deleteSubmitButtons = document.querySelectorAll(".delete-button");
 
@@ -58,3 +62,62 @@ document.addEventListener('livewire:load', function () {
 window.addEventListener('show-delete-modal',event =>{
     $('#confirmationModal').modal('show');
 })
+
+const xValues = ["Brown-Hodkiewicz", "Lang, Nolan and Mertz", "McKenzie, Farrell and Reichert", "Harber Group", "Wyman-Waters"];
+const yValues = [946.47, 1309.48, 946.53, 634.42, 561.98];
+const barColors = ["red", "green","blue","orange","brown"];
+const backgroundColor =["trasparent"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Miglior fatturato 2022"
+    },
+  }
+});
+
+
+new Chart("myAreaChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Miglior fatturato 2022"
+    },
+  }
+});
+
+new Chart("myPieChart", {
+    type: "pie",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Miglior fatturato 2022"
+      }
+    }
+  });
